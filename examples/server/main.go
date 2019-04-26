@@ -1,13 +1,12 @@
 package main
 
 import (
-	"net/http"
 	"log"
+	"net/http"
 	"time"
 
 	"github.com/zdjones/short"
 )
-
 
 func main() {
 	shortener, err := short.ShortenerHandler("http://lu.sh", "short.db")
@@ -16,10 +15,10 @@ func main() {
 	}
 
 	mux := http.NewServeMux()
-	mux.Handle("/endpoint/", &shortener)
-	
+	mux.Handle("/endpoint", &shortener)
+
 	s := &http.Server{
-		Addr: 		":8080",
+		Addr:         ":8080",
 		Handler:      mux,
 		ReadTimeout:  10 * time.Second,
 		WriteTimeout: 10 * time.Second,
